@@ -34,8 +34,8 @@ typedef std::vector<HonorStanding> HonorStandingList;
 struct WeeklyScore
 {
     WeeklyScore()
-        : level(0), account(0), hk(0), dk(0), 
-          cp(0.0f), oldRp(0.0f), newRp(0.0f), earning(0.0f), 
+        : level(0), account(0), hk(0), dk(0),
+          cp(0.0f), oldRp(0.0f), newRp(0.0f), earning(0.0f),
           standing(0), highestRank(0) {}
 
     uint8  level;
@@ -74,6 +74,7 @@ class HonorMaintenancer
         HonorStandingList& GetStandingListByTeam(Team team);
         HonorScores GenerateScores(HonorStandingList& standingList);
         float CalculateRpEarning(float cp, HonorScores sc);
+        float DarrowshireDiminishRpEarning(float rpEarning);
         float CalculateRpDecay(float rpEarning, float rp);
         float MaximumRpAtLevel(uint8 level);
 
@@ -161,7 +162,7 @@ class HonorMgr
         static void CalculateRankInfo(HonorRankInfo& prk);
         static HonorRankInfo CalculateRank(float rankPoints, uint32 totalHK = 0);
         uint32 CalculateTotalKills(Unit* victim) const;
-        
+
         static float DishonorableKillPoints(uint8 level);
         static float HonorableKillPoints(Player* killer, Player* victim, uint32 groupsize);
 
@@ -191,7 +192,7 @@ class HonorMgr
         void SetLastWeekCP(float lastWeekCP) { m_lastWeekCP = lastWeekCP; }
         uint32 GetLastWeekHK() const { return m_lastWeekHK; }
         void SetLastWeekHK(uint32 lastWeekHK) { m_lastWeekHK = lastWeekHK; }
-        
+
         HonorCPMap& GetHonorCP() { return m_honorCP; }
 
         void SendPVPCredit(Unit* victim, float honor);
